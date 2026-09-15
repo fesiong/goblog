@@ -101,9 +101,10 @@ type Website struct {
 	PluginLLMs         *config.PluginLLMsConfig
 	PluginPlace        *config.PluginPlaceConfig
 
-	sensitiveAcMatcher *library.AhoCorasick
-	sensitiveRegexes   []*regexp.Regexp
-	anchorAcMatcher    *library.AhoCorasick
+	sensitiveAcMatcher         *library.AhoCorasick
+	sensitiveRegexes           []*regexp.Regexp
+	sensitiveRegexReplacements map[string]string
+	anchorAcMatcher            *library.AhoCorasick
 
 	CollectorConfig *config.CollectorJson
 	KeywordConfig   *config.KeywordJson
