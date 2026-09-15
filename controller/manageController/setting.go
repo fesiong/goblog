@@ -255,6 +255,7 @@ func SettingIndexForm(ctx iris.Context) {
 	currentSite.Index.SeoTitle = req.SeoTitle
 	currentSite.Index.SeoKeywords = req.SeoKeywords
 	currentSite.Index.SeoDescription = req.SeoDescription
+	currentSite.Index.Sep = req.Sep
 
 	err := currentSite.SaveSettingValue(provider.IndexSettingKey, currentSite.Index)
 	if err != nil {
