@@ -137,7 +137,6 @@ func AutoMigrateDB(db *gorm.DB, force bool) error {
 			&model.AdminLoginLog{},
 			&model.AdminLog{},
 			&model.Attachment{},
-			&model.AttachmentCategory{},
 			&model.Category{},
 			&model.Nav{},
 			&model.NavType{},

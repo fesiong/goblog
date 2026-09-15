@@ -154,11 +154,6 @@ func manageRoute(app *iris.Application) {
 			attachment.Post("/delete", manageController.AttachmentDelete)
 			attachment.Post("/edit", manageController.AttachmentEdit)
 			attachment.Post("/scan", manageController.AttachmentScanUploads)
-
-			attachment.Post("/category", manageController.AttachmentChangeCategory)
-			attachment.Get("/category/list", manageController.AttachmentCategoryList)
-			attachment.Post("/category/detail", manageController.AttachmentCategoryDetailForm)
-			attachment.Post("/category/delete", manageController.AttachmentCategoryDelete)
 		}
 
 		module := manage.Party("/module", middleware.ParseAdminToken, middleware.AdminPermission)

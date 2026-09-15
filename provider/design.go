@@ -1249,7 +1249,6 @@ func (w *Website) RestoreDesignData(packageName string) error {
 //			archives             []model.Archive
 //			archiveData          []model.ArchiveData
 //			attachments          []model.Attachment
-//			attachmentCategories []model.AttachmentCategory
 //			categories           []model.Category
 //			archiveCategories    []model.ArchiveCategory
 //			comments             []model.Comment
@@ -1416,15 +1415,6 @@ func (w *Website) restoreSingleData(name string, reader io.ReadCloser) {
 			return
 		}
 		for _, v := range attachments {
-			w.DB.Clauses(clause.OnConflict{UpdateAll: true}).Create(&v)
-		}
-	} else if name == "attachmentCategories" {
-		var attachmentCategories []model.AttachmentCategory
-		err = json.Unmarshal(data, &attachmentCategories)
-		if err != nil {
-			return
-		}
-		for _, v := range attachmentCategories {
 			w.DB.Clauses(clause.OnConflict{UpdateAll: true}).Create(&v)
 		}
 	} else if name == "comments" {
@@ -1603,11 +1593,6 @@ func (w *Website) BackupDesignData(packageName string) error {
 			thumbPath := w.PublicPath + thumbName
 			_ = w.writeFileToZip(thumbName, thumbPath, zw)
 		}
-	}
-	var attachmentCategories []model.AttachmentCategory
-	w.DB.Where("`status` = 1").Order("`id` desc").Limit(maxLimit).Find(&attachmentCategories)
-	if len(attachmentCategories) > 0 {
-		_ = w.writeDataToZip("attachmentCategories", attachmentCategories, zw)
 	}
 	var categories []model.Category
 	w.DB.Where("`status` = 1").Order("`id` desc").Limit(maxLimit).Find(&categories)
